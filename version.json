@@ -1,8 +1,8 @@
 {
-  "version": "0.5.2",
-  "build_number": 12,
+  "version": "0.5.3",
+  "build_number": 13,
   "download_url": "https://drive.google.com/uc?export=download&id=1TtSL1sS7wRcAQh5KXLGO6LmrZE0aYaGi",
   "force_update": false,
-  "message_ro": "Este disponibilă o versiune nouă SpareLog. Actualizează pentru cele mai recente îmbunătățiri și corecții.",
-  "message_en": "A new SpareLog version is available. Update for the latest improvements and fixes."
+  "message_ro": "Actualizarea SpareLog 0.5.3 îmbunătățește formularul și raportarea: toate câmpurile sunt obligatorii, iar raportul Excel este mai compact, cu fotografii proporționate și acces rapid la imagine.",
+  "message_en": "SpareLog 0.5.3 improves data entry and reporting: all fields are required, and the Excel report is more compact with proportional photos and quick image access."
 }
