@@ -1,8 +1,8 @@
 {
-  "version": "0.5.3",
-  "build_number": 13,
+  "version": "0.5.4",
+  "build_number": 14,
   "download_url": "https://drive.google.com/uc?export=download&id=1TtSL1sS7wRcAQh5KXLGO6LmrZE0aYaGi",
   "force_update": false,
-  "message_ro": "Actualizarea SpareLog 0.5.3 îmbunătățește formularul și raportarea: toate câmpurile sunt obligatorii, iar raportul Excel este mai compact, cu fotografii proporționate și acces rapid la imagine.",
-  "message_en": "SpareLog 0.5.3 improves data entry and reporting: all fields are required, and the Excel report is more compact with proportional photos and quick image access."
+  "message_ro": "SpareLog 0.5.4 simplifică definitiv evidența pieselor: câmpurile Locație, Zonă și Utilaj au fost eliminate din aplicație, baza de date și raportare. Owner-ul poate genera acum rapoarte lunare pentru colegii activi direct din Centrul Owner, iar raportul Excel păstrează formatul compact, fotografiile proporționate și accesul rapid la imagine.",
+  "message_en": "SpareLog 0.5.4 permanently simplifies spare-parts records: Location, Area and Machine have been removed from the app, database and reporting. Owners can now generate monthly reports for active colleagues directly from Owner Center, while Excel reports remain compact with proportional photos and quick image access."
 }
