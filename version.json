@@ -1,8 +1,8 @@
 {
-  "version": "0.5.7",
-  "build_number": 17,
+  "version": "0.5.8",
+  "build_number": 18,
   "download_url": "https://drive.google.com/uc?export=download&id=1TtSL1sS7wRcAQh5KXLGO6LmrZE0aYaGi",
   "force_update": false,
-  "message_ro": "SpareLog 0.5.7 schimbă recuperarea parolei pe cod OTP introdus direct în aplicație. Utilizatorul primește un cod numeric pe email, îl verifică în SpareLog și apoi setează parola nouă fără browser sau linkuri de resetare.",
-  "message_en": "SpareLog 0.5.7 changes password recovery to an OTP code entered directly in the app. Users receive a numeric code by email, verify it in SpareLog, and then set a new password without a browser or reset links."
+  "message_ro": "SpareLog 0.5.8 adaugă Istoric piese pentru fiecare cont: poți naviga între luni și vedea exclusiv piesele înregistrate de utilizatorul autentificat, fără amestecarea datelor colegilor. Resetarea parolei prin cod OTP rămâne disponibilă.",
+  "message_en": "SpareLog 0.5.8 adds personal Parts History: users can navigate between months and see only the parts registered by the signed-in account, keeping colleagues' data separate. OTP password recovery remains available."
 }
