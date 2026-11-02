@@ -1,8 +1,8 @@
 {
-  "version": "0.5.6",
-  "build_number": 16,
+  "version": "0.5.7",
+  "build_number": 17,
   "download_url": "https://drive.google.com/uc?export=download&id=1TtSL1sS7wRcAQh5KXLGO6LmrZE0aYaGi",
   "force_update": false,
-  "message_ro": "SpareLog 0.5.6 întărește recuperarea parolei pentru emailurile corporate: resetarea trece prin pagina securizată sparelog.ro, astfel încât scanerele automate de linkuri să nu consume tokenul înaintea utilizatorului. Versiunea aplicației și sistemul intern de update sunt acum sincronizate la build 16.",
-  "message_en": "SpareLog 0.5.6 strengthens password recovery for corporate email accounts: resets now use the secure sparelog.ro recovery page so automated link scanners do not consume the token before the user. The app version and internal update service are synchronized to build 16."
+  "message_ro": "SpareLog 0.5.7 schimbă recuperarea parolei pe cod OTP introdus direct în aplicație. Utilizatorul primește un cod numeric pe email, îl verifică în SpareLog și apoi setează parola nouă fără browser sau linkuri de resetare.",
+  "message_en": "SpareLog 0.5.7 changes password recovery to an OTP code entered directly in the app. Users receive a numeric code by email, verify it in SpareLog, and then set a new password without a browser or reset links."
 }
