@@ -1,8 +1,8 @@
 {
-  "version": "0.5.5",
-  "build_number": 15,
+  "version": "0.5.6",
+  "build_number": 16,
   "download_url": "https://drive.google.com/uc?export=download&id=1TtSL1sS7wRcAQh5KXLGO6LmrZE0aYaGi",
   "force_update": false,
-  "message_ro": "SpareLog 0.5.5 adaugă recuperarea parolei direct din ecranul de autentificare. Utilizatorul poate solicita un link securizat pe email, deschide linkul în aplicație și seta o parolă nouă. Datele și piesele existente rămân neschimbate.",
-  "message_en": "SpareLog 0.5.5 adds password recovery directly from the sign-in screen. Users can request a secure email link, open it in the app and set a new password. Existing data and spare parts remain unchanged."
+  "message_ro": "SpareLog 0.5.6 întărește recuperarea parolei pentru emailurile corporate: resetarea trece prin pagina securizată sparelog.ro, astfel încât scanerele automate de linkuri să nu consume tokenul înaintea utilizatorului. Versiunea aplicației și sistemul intern de update sunt acum sincronizate la build 16.",
+  "message_en": "SpareLog 0.5.6 strengthens password recovery for corporate email accounts: resets now use the secure sparelog.ro recovery page so automated link scanners do not consume the token before the user. The app version and internal update service are synchronized to build 16."
 }
