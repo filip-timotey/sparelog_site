@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Resetare parolă · SpareLog</title>
+  <style>
+    :root{--bg:#08131d;--card:#102331;--text:#eef6f8;--muted:#9eb0bd;--accent:#28c7a5;--accent2:#66e0c7;--danger:#ffb4ab;--line:rgba(255,255,255,.10)}
+    *{box-sizing:border-box}html,body{min-height:100%;margin:0}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 70% 10%,rgba(40,199,165,.16),transparent 30%),linear-gradient(180deg,#08131d,#0d1b27);color:var(--text);display:grid;place-items:center;padding:24px}
+    .wrap{width:min(100%,480px)}.brand{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:22px;font-weight:850;font-size:22px}.mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--accent),#147966);display:grid;place-items:center;font-weight:900;color:#fff}
+    .card{background:rgba(16,35,49,.94);border:1px solid var(--line);border-radius:26px;padding:30px;box-shadow:0 28px 80px rgba(0,0,0,.28);backdrop-filter:blur(16px)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#bfeee3;background:rgba(255,255,255,.05);border:1px solid var(--line);padding:7px 10px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+    h1{font-size:32px;line-height:1.08;margin:18px 0 10px;letter-spacing:-.03em}p{color:var(--muted);margin:0 0 22px;line-height:1.6}
+    label{display:block;font-size:13px;font-weight:750;margin:14px 0 7px}input{width:100%;border:1px solid rgba(255,255,255,.12);background:#0a1822;color:#fff;border-radius:14px;padding:14px 15px;font-size:16px;outline:none}input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(40,199,165,.12)}
+    button{width:100%;border:0;border-radius:14px;padding:14px 16px;margin-top:18px;background:var(--accent);color:#06231d;font-weight:850;font-size:15px;cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
+    .status{display:none;margin-top:16px;padding:12px 14px;border-radius:13px;font-size:14px;line-height:1.45}.status.error{display:block;background:rgba(255,180,171,.10);border:1px solid rgba(255,180,171,.25);color:var(--danger)}.status.ok{display:block;background:rgba(40,199,165,.10);border:1px solid rgba(40,199,165,.25);color:#bff2e6}
+    .note{margin-top:18px;font-size:12px;color:#8097a2;text-align:center;line-height:1.55}.hidden{display:none!important}.success{text-align:center}.success .icon{width:64px;height:64px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:rgba(40,199,165,.13);color:var(--accent2);font-size:30px;font-weight:900}.success a{display:inline-flex;margin-top:8px;color:var(--accent2);font-weight:800;text-decoration:none}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand"><div class="mark">SL</div><span>SpareLog</span></div>
+    <section class="card" id="resetCard">
+      <span class="eyebrow"><span class="dot"></span> Recuperare securizată</span>
+      <h1>Setează o parolă nouă</h1>
+      <p>Linkul din email nu este consumat automat. Verificarea are loc doar când confirmi noua parolă pe această pagină.</p>
+      <form id="resetForm" autocomplete="off">
+        <label for="password">Parolă nouă</label>
+        <input id="password" type="password" minlength="8" autocomplete="new-password" required placeholder="Minimum 8 caractere">
+        <label for="confirmPassword">Confirmă parola</label>
+        <input id="confirmPassword" type="password" minlength="8" autocomplete="new-password" required placeholder="Repetă parola">
+        <button id="submitButton" type="submit">Schimbă parola</button>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </form>
+      <div class="note">Dacă nu ai solicitat resetarea parolei, închide această pagină. SpareLog nu îți va cere niciodată parola prin email.</div>
+    </section>
+    <section class="card success hidden" id="successCard">
+      <div class="icon">✓</div>
+      <h1>Parola a fost schimbată</h1>
+      <p>Poți reveni în SpareLog și te poți autentifica folosind parola nouă.</p>
+      <a href="https://sparelog.ro/">Înapoi la sparelog.ro</a>
+    </section>
+  </main>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    const SUPABASE_URL = 'https://szbvircnjpenvikwvupj.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_E5yeZH314AJXmxhTz41XlQ_TvwUkZEX';
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false }
+    });
+
+    const form = document.getElementById('resetForm');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const button = document.getElementById('submitButton');
+    const status = document.getElementById('status');
+    const resetCard = document.getElementById('resetCard');
+    const successCard = document.getElementById('successCard');
+
+    const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+    const tokenHash = params.get('token_hash') || '';
+
+    function showError(message) {
+      status.className = 'status error';
+      status.textContent = message;
+    }
+
+    function showOk(message) {
+      status.className = 'status ok';
+      status.textContent = message;
+    }
+
+    if (!tokenHash) {
+      showError('Linkul de resetare este incomplet. Solicită un email nou din aplicația SpareLog.');
+      button.disabled = true;
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status.className = 'status';
+      status.textContent = '';
+
+      if (password.value.length < 8) {
+        showError('Parola trebuie să aibă minimum 8 caractere.');
+        return;
+      }
+      if (password.value !== confirmPassword.value) {
+        showError('Parolele introduse nu coincid.');
+        return;
+      }
+      if (!tokenHash) return;
+
+      button.disabled = true;
+      button.textContent = 'Se verifică...';
+      showOk('Verificăm solicitarea și actualizăm parola în siguranță.');
+
+      try {
+        const { error: verifyError } = await supabase.auth.verifyOtp({
+          token_hash: tokenHash,
+          type: 'recovery'
+        });
+        if (verifyError) throw verifyError;
+
+        const { error: updateError } = await supabase.auth.updateUser({
+          password: password.value
+        });
+        if (updateError) throw updateError;
+
+        await supabase.auth.signOut();
+        history.replaceState(null, '', location.pathname);
+        resetCard.classList.add('hidden');
+        successCard.classList.remove('hidden');
+      } catch (error) {
+        const message = String(error?.message || error || '').toLowerCase();
+        if (message.includes('expired') || message.includes('invalid') || message.includes('token')) {
+          showError('Linkul nu mai este valid sau a expirat. Solicită un email nou din SpareLog și folosește cel mai recent mesaj primit.');
+        } else {
+          showError('Nu am putut schimba parola. Verifică conexiunea și încearcă din nou.');
+        }
+        button.disabled = false;
+        button.textContent = 'Schimbă parola';
+      }
+    });
+  </script>
+</body>
+</html>
